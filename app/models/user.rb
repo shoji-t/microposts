@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
     validates :profile, absence: true, 
                        on: :create
     validates :profile, allow_blank: true, 
-                       length: { minimum: 4, maximum: 140 }, 
-                       on: :update
+                    length: { minimum: 4, maximum: 140 }, 
+                    on: :update
 end
