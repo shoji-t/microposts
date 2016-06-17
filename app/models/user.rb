@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
     validates :profile, allow_blank: true, 
                     length: { minimum: 4, maximum: 140 }, 
                     on: :update
+    has_many :microposts
 end
