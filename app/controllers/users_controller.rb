@@ -32,6 +32,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def favorite
+    @title = 'Favorite Microposts'
+    @micropost = current_user.microposts.build
+    @feed_microposts = current_user.favorite_microposts.paginate(page: params[:page])
+    render template: 'about/index'
+  end
+  
   def followings
     @title = "Following"
     @users = @user.following_users
