@@ -8,5 +8,6 @@
       <ul>
         <li><%= link_to "followings(#{@user.following_users.count})" ,followings_user_path(@user) %></li>
         <li><%= link_to "followers(#{@user.follower_users.count})" ,followers_user_path(@user) %></li>
+        <li><%= link_to "favorites(#{@user.add_favorites.count})" ,favorites_user_path(@user) %></li>
       </ul>  
     </section>

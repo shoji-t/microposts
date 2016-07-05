@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update, :followings, :followers]
+  before_action :set_params, only: [:show, :edit, :update, :followings, :followers, :favorites]
   before_action :correct_user, only: [:edit, :update]
 
   def show # 追加
-    @microposts = @user.microposts.order(created_at: :desc)
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page])
   end
   
   def new
@@ -32,22 +32,20 @@ class UsersController < ApplicationController
     end
   end
   
-  def favorite
+  def favorites
     @title = 'Favorite Microposts'
-    @micropost = current_user.microposts.build
-    @feed_microposts = current_user.favorite_microposts.paginate(page: params[:page])
-    render template: 'about/index'
+    @microposts = @user.add_favorites.order(created_at: :desc).page(params[:page])
   end
   
   def followings
     @title = "Following"
-    @users = @user.following_users
+    @users = @user.following_users.page(params[:page])
     render 'show_follow'
   end
   
   def followers
     @title = "Followers"
-    @users = @user.follower_users
+    @users = @user.follower_users.page(params[:page])
     render 'show_follow'
   end
   
